@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="confirmation-container">
+    <div class="confirmation-header">
+        <div class="success-icon">✓</div>
+        <h1>Booking Confirmed!</h1>
+        <p class="confirmation-subtitle">Your journey has been successfully booked</p>
+    </div>
+
+    <div class="booking-details">
+        <div class="passenger-info">
+            <h2>Passenger Information</h2>
+            <div class="info-card">
+                <div class="info-item">
+                    <span class="label">Name:</span>
+                    <span class="value">{{ booking.name }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Email:</span>
+                    <span class="value">{{ booking.email }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Travel Date:</span>
+                    <span class="value">{{ booking.travel_date.strftime('%B %d, %Y') }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Booking ID:</span>
+                    <span class="value">#{{ booking.id }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="journey-details">
+            <h2>Journey Details</h2>
+            <div class="journey-card">
+                <div class="route-visualization">
+                    {% for station_id in path %}
+                        <div class="station-point {% if loop.first %}start{% elif loop.last %}end{% endif %}">
+                            <div class="station-number">{{ loop.index }}</div>
+                            <div class="station-name">
+                                {{ stations[station_id].name }}
+                            </div>
+                            <div class="station-location">
+                                {{ stations[station_id].location }}
+                            </div>
+                        </div>
+                        {% if not loop.last %}
+                            <div class="path-segment">
+                                <div class="segment-info">
+                                    <span class="distance">{{ "%.1f"|format(segment_distances[loop.index0]) }} km</span>
+                                    <span class="cost">₹{{ "%.2f"|format(segment_costs[loop.index0]) }}</span>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="journey-summary">
+                    <div class="summary-item">
+                        <span class="label">From:</span>
+                        <span class="value">{{ source.name }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">To:</span>
+                        <span class="value">{{ destination.name }}</span>
+                    </div>
+                    <div class="summary-item highlight">
+                        <span class="label">Total Distance:</span>
+                        <span class="value">{{ "%.2f"|format(total_distance) }} km</span>
+                    </div>
+                    <div class="summary-item highlight">
+                        <span class="label">Total Cost:</span>
+                        <span class="value">₹{{ "%.2f"|format(total_cost) }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Estimated Time:</span>
+                        <span class="value">{{ "%.1f"|format(total_distance/1000) }} hours</span>
+                    </div>
+                </div>
+
+                <div class="intermediate-stations">
+                    <h3>Intermediate Stations</h3>
+                    <div class="stations-list">
+                        {% for station_id in path %}
+                            {% if not loop.first and not loop.last %}
+                                <div class="station-item">
+                                    <div class="station-number">{{ loop.index }}</div>
+                                    <div class="station-details">
+                                        <div class="station-name">{{ stations[station_id].name }}</div>
+                                        <div class="station-location">{{ stations[station_id].location }}</div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="important-info">
+            <h2>Important Information</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="card-icon">🎫</div>
+                    <h3>Ticket Collection</h3>
+                    <p>Please arrive at the station 30 minutes before departure with your booking ID and valid ID proof.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🕒</div>
+                    <h3>Departure Time</h3>
+                    <p>Your train will depart at {{ booking.travel_date.strftime('%I:%M %p') }}. Please be on time.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">📱</div>
+                    <h3>Contact Information</h3>
+                    <p>For any queries, please contact our customer service at support@hyperloop.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="{{ url_for('index') }}" class="btn-primary">Book Another Journey</a>
+        <button onclick="window.print()" class="btn-secondary">Print Ticket</button>
+    </div>
+</div>
+{% endblock %} 

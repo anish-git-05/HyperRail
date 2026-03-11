@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="algorithm-container">
+    <div class="algorithm-header">
+        <h1>How We Find Your Perfect Route</h1>
+        <p class="subtitle">A visual journey through our route optimization process</p>
+    </div>
+
+    <div class="algorithm-content">
+        <div class="algorithm-intro">
+            <h2>The Magic Behind Your Route</h2>
+            <p>We use a sophisticated algorithm that guarantees finding the most efficient path between any two stations. Think of it as a smart GPS that considers not just distance, but also cost and time efficiency.</p>
+        </div>
+
+        <div class="mathematical-expression">
+            <h2>Route Weight Calculation</h2>
+            <div class="formula-container">
+                <div class="formula">
+                    <h3>Total Route Weight</h3>
+                    <div class="formula-box">
+                        <p>W = αD + βC</p>
+                        <div class="formula-explanation">
+                            <p>Where:</p>
+                            <ul>
+                                <li>W = Total Weight of the route</li>
+                                <li>D = Total Distance (in kilometers)</li>
+                                <li>C = Total Cost (in ₹)</li>
+                                <li>α = Distance weight factor (0.6)</li>
+                                <li>β = Cost weight factor (0.4)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="formula-example">
+                    <h3>Example Calculation</h3>
+                    <div class="example-box">
+                        <p>For a route with:</p>
+                        <ul>
+                            <li>Distance = 100 km</li>
+                            <li>Cost = ₹500</li>
+                        </ul>
+                        <p>W = (0.6 × 100) + (0.4 × 500)</p>
+                        <p>W = 60 + 200</p>
+                        <p>W = 260</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="visual-explanation">
+            <div class="explanation-step">
+                <div class="step-visual">
+                    <div class="network-diagram">
+                        <div class="station-node">Station A</div>
+                        <div class="station-node">Station B</div>
+                        <div class="station-node">Station C</div>
+                        <div class="station-node">Station D</div>
+                        <div class="connection-line" data-distance="100">100km</div>
+                        <div class="connection-line" data-distance="150">150km</div>
+                        <div class="connection-line" data-distance="200">200km</div>
+                    </div>
+                </div>
+                <div class="step-description">
+                    <h3>Step 1: Network Mapping</h3>
+                    <p>We create a map of all stations and their connections. Each line represents a possible route between stations, with its distance and cost.</p>
+                </div>
+            </div>
+
+            <div class="explanation-step">
+                <div class="step-visual">
+                    <div class="path-finding-animation">
+                        <div class="station-node start">Start</div>
+                        <div class="station-node">A</div>
+                        <div class="station-node">B</div>
+                        <div class="station-node end">End</div>
+                        <div class="path-highlight"></div>
+                        <div class="distance-label">100km</div>
+                        <div class="distance-label">150km</div>
+                        <div class="distance-label">200km</div>
+                    </div>
+                </div>
+                <div class="step-description">
+                    <h3>Step 2: Path Finding</h3>
+                    <p>The algorithm explores all possible routes, calculating the total distance and cost for each path. It's like having a smart explorer who checks every possible way to reach your destination.</p>
+                </div>
+            </div>
+
+            <div class="explanation-step">
+                <div class="step-visual">
+                    <div class="comparison-chart">
+                        <div class="route-option">
+                            <div class="route-name">Route 1</div>
+                            <div class="route-bar" style="--percentage: 100%"></div>
+                            <div class="route-stats">100km • ₹500</div>
+                        </div>
+                        <div class="route-option">
+                            <div class="route-name">Route 2</div>
+                            <div class="route-bar" style="--percentage: 120%"></div>
+                            <div class="route-stats">120km • ₹600</div>
+                        </div>
+                        <div class="route-option">
+                            <div class="route-name">Route 3</div>
+                            <div class="route-bar" style="--percentage: 150%"></div>
+                            <div class="route-stats">150km • ₹750</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-description">
+                    <h3>Step 3: Route Comparison</h3>
+                    <p>We compare all possible routes based on distance, cost, and time. The algorithm automatically selects the most efficient option for your journey.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="algorithm-features">
+            <h2>Why Our Route Finding is Special</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Smart Selection</h3>
+                    <p>Automatically finds the most efficient route considering multiple factors</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Calculates optimal routes in milliseconds, even for complex networks</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Cost Effective</h3>
+                    <p>Always finds the balance between distance and cost</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Real-time Updates</h3>
+                    <p>Adapts to changes in the network instantly</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
