@@ -61,7 +61,8 @@ def create_app():
             if not path:
                 flash('No route found between these stations.')
                 return redirect(url_for('index'))
-            
+            stations_in_path = Station.query.filter(Station.id.in_(path)).all()
+            station_dict = {station.id: station for station in stations_in_path}
             # Calculate segment distances and costs
             segment_distances = []
             segment_costs = []
@@ -86,14 +87,18 @@ def create_app():
             session['segment_costs'] = segment_costs
             session['total_distance'] = total_distance
             session['total_cost'] = total_cost
-            
-            return render_template('result.html', 
-                                 path=path,
-                                 total_distance=total_distance,
-                                 total_cost=total_cost,
-                                 source=source,
-                                 destination=destination)
-                                 
+                
+            return render_template(
+                'result.html',
+                path=path,
+                total_distance=total_distance,
+                total_cost=total_cost,
+                source=source,
+                destination=destination,
+                segment_distances=segment_distances,
+                segment_costs=segment_costs,
+                stations=station_dict
+            )
         except (ValueError, TypeError):
             flash('Invalid input. Please select valid stations.')
             return redirect(url_for('index'))
